@@ -1,0 +1,27 @@
+{% extends "mainpage.html" %}
+{% block content %}
+<form method="post" action="/updatemovies/{{mov.movie_id}}" enctype="multipart/form-data">
+ {% csrf_token %}
+ <label>Movie Name</label> 
+ <input type="text" name="movie_Name" value="{{mov.movie_Name}}"/>
+ <label>Event Details</label>
+  <input type="text" name="Movie_Details" value="{{mov.Movie_Details}}"/>
+  <label>Casts</label>
+  <input type="text" name="Casts" value="{{mov.Casts}}"/>
+   <label>Poster</label>
+ {% load static %}
+ <img src="{% static '/media/' %}{{mov.Poster}}" width="100"/>
+ <input type="file" name="Poster"/>
+ <label>Trailer video</label>
+ <input type="file" src="{% static '/media/' %}{{mov.Trailer}}" width="40" name="Trailer"/>
+	<button type="submit">Submit</button>
+	<label>Start Date</label>
+<input type="date" name="StartDate"/>
+<label>End Date</label>
+<input type="date" name="EndDate"/>
+<label>Start Time</label>
+<input type="time" name="StartTime"/>
+<label>End Time</label>
+<input type="time" name="EndTime"/>
+</form>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "mainpage.html" %}
+{% block content %}
+<form method="post" action="/update/{{user.user_id}}" enctype="multipart/form-data">
+ {% csrf_token %}
+ <label>Username</label> 
+ <input type="text" name="Username" value="{{user.Username}}"/>
+<label>Password</label> 
+ <input type="text" name="Password" value="{{user.Password}}"/>
+ <label>Email</label> 
+ <input type="text" name="Email" value="{{user.Email}}"/>
+ <label>Contact Number</label> 
+ <input type="text" name="Contact_Number" value="{{user.Contact_Number}}"/> 
+  {% load static %}
+ <label>Profile Picture</label>
+ <img src="{% static '/media/' %}{{user.Profile_Pic}}" width="100"/>
+ <input type="file" name="Profile_Pic"/>
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

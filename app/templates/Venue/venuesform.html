@@ -1,0 +1,10 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="Post" action="/venueform" enctype="multipart/form-data" class="form-group">
+ {% csrf_token %} 
+	{{venueforms.Venue_Name|as_crispy_field}}
+	{{venueforms.Venue_img|as_crispy_field}}
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

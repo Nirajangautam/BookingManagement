@@ -1,0 +1,69 @@
+{% extends "mainpage.html" %}
+{% block content%}
+{% load static %}
+<script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+<a id="btn" class="btn btn-info" href="/ebookform">New Booking</a>
+<input type="text" id="search" name="">
+<button id="btnSearch" class="btn btn-outline-success">Search</button>
+<table class="table table-hover table-striped table-responsive">
+	<tr class="thead-dark">
+		
+		   <th>S_No</th>
+		   <th>Event Name</th>
+		   <th>Booked By</th>
+		   <th>Venue</th>
+             <th>Time</th>
+             <th>Booked for</th>
+		   <th>Action</th>
+		   
+	</tr>
+
+{% for  Eb in ebook %}
+ <tr>
+ 	<td>{{Eb.Ebooking_id}}</td>
+     <td>{{Eb.Event.Event_Name}}</td>
+ 	<td>{{Eb.Bookedby.Username}}</td>
+     <td>{{Eb.E_Venue.Venue_Name}}</td>
+     <td>{{Eb.Event.StartTime}}</td>
+     <td>{{Eb.Event.StartDate}}</td>
+ 	<td><a class="btn btn-warning" href="editEbook/{{Eb.Ebooking_id}}">Edit</a>
+          <a class="btn btn-danger" href="deleteEbook/{{Eb.Ebooking_id}}">Delete</a></td>
+    
+
+ </tr>	
+ {% endfor %}
+</table>
+<script language="JavaScript">
+	      $(document).ready(()=>{
+               $('#btnSearch').click(()=>{
+          	    $.ajax({
+          	    	data:{search:$('#search').val()},
+          	    	url:'/Esearch',
+          	    	method:'GET',
+          	    	success:function(data){
+          	    		console.log(data);
+          	    		$ ("tr").not("tr:First").remove();
+          	    		var html="";
+          	    		for(d of data){
+          	    			html+="<tr>";
+          	    				html+="<td>"+d.Ebooking_id+"</td>";
+          	    				html+="<td>"+d.Event.Event_Name+"</td>";
+          	    				html+="<td>"+d.Bookedby.Username+"</td>";
+                                   html+="<td>"+d.E_Venue.Venue_Name+"</td>";
+                                   html+="<td>"+d.Event.StartTime+"</td>";
+                                   html+="<td>"+d.Event.StartDate+"</td>";
+          	    				html+="<td><a href='editEbook/"+d.Ebooking_id+"'>Edit</a><a href='deleteEbook/"+d.Ebooking_id+"'>Delete</a></td>"
+          	    			html+="</tr>"
+          	    			$("table").append(html);
+
+          	    		}
+
+          	    	},error(error){
+
+          	    	}
+          })
+		    })
+               })
+
+	</script>
+     {% endblock content %}

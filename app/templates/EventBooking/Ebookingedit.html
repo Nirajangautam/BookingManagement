@@ -1,0 +1,52 @@
+{% extends "mainpage.html" %}
+{% block content %}
+<form method="post" action="/UpdateEbook/{{ebook.Ebooking_id}}">
+ {% csrf_token %}
+ <label>Event Name</label> 
+    <select name="Event" id="Event">
+    	{% for x in event %}
+    	<option value="{{x.event_id}}">{{x.Event_Name}}</option>
+    	{% endfor %}
+    </select>
+
+  <label>Event Venue</label>
+	<select name="E_Venue" id="venue">
+		{% for d in venue %}
+		<option value="{{d.S_No}}">{{d.Venue_Name}}</option>
+		{% endfor %} 
+
+	</select>
+	<label>Booked by</label>
+	<select name="Bookedby" id="bookby">
+		{% for u in user %}
+		<option value="{{u.user_id}}">{{u.Username}}</option>
+		{% endfor %}
+	</select>
+	<button type="submit">Submit</button>
+</form>
+
+<script>
+$(document).ready(()=>{
+let child=$("#Event").children();
+for(i=0;i<child.length;i++){
+	if(child[i].getAttribute('value')=="{{ebook.Event.event_id}}"){
+		$(child[i]).prop('selected',true);
+	}
+}
+
+let childb=$("#bookby").children();
+for(i=0;i<childb.length;i++){
+	if(childb[i].getAttribute('value')=="{{ebook.Bookedby.user_id}}"){
+		$(childb[i]).prop('selected',true);
+	}
+}
+
+let childc=$("#venue").children();
+for(i=0;i<childc.length;i++){
+	if(childc[i].getAttribute('value')=="{{ebook.E_Venue.S_No}}"){
+		$(childc[i]).prop('selected',true);
+	}
+}
+});
+</script>
+{% endblock content %}

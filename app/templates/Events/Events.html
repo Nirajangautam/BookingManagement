@@ -1,0 +1,83 @@
+{% extends "mainpage.html" %}
+{% block content%}
+{% load static %}
+<script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+
+
+<a id="btn" class="btn btn-info" href="/eventform">Add Events</a>
+<input type="text" id="search" name="">
+<button type="button" class="btn btn-outline-success"  id="btnSearch">Search</button>
+
+<table class="table table-hover table-responsive">
+      <thead class="thead-dark" scope="col">
+	    <tr> 
+		
+		    <th>S_No</th>
+		    <th>Event Name</th>
+		    <th>Poster</th>
+		    <th>Promo Video</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+		    <th>Action</th>   
+	    </tr>
+      </thead>
+{% for event in event %}
+ <tr>
+ 	
+ 	<td>{{event.event_id}}</td>
+ 	<td>{{event.Event_Name}}</td>
+     {% load static %}
+     <td><img src="{% static '/media/' %}{{event.Poster}}" width="40"/></td>
+ 	<td><video src="{% static '/media/' %}{{event.Trailer}}" type='video/mp4' width="100"/ controls=""></video></td>
+     <td>{{event.StartTime}}</td>
+     <td>{{event.EndTime}}</td>
+     <td>{{event.StartDate}}</td>
+     <td>{{event.EndDate}}</td>
+ 	<td>
+          <a class="btn btn-warning" href="editevent/{{event.event_id}}">Edit</a>
+          <a class="btn btn-danger" href="deleteevent/{{event.event_id}}">Delete</a>
+     </td>
+    
+
+ </tr>	
+ {% endfor %}
+</table>
+<script language="JavaScript">
+	      $(document).ready(()=>{
+               $('#btnSearch').click(()=>{
+          	    $.ajax({
+          	    	data:{search:$('#search').val()},
+          	    	url:'/eventsearch',
+          	    	method:'GET',
+          	    	success:function(data){
+          	    		console.log(data);
+          	    		$ ("tr").not("tr:First").remove();
+          	    		var html="";
+          	    		for(d of data){
+          	    			html+="<tr>";
+          	    				html+="<td>"+d.event_id+"</td>";
+          	    				html+="<td>"+d.Event_Name+"</td>";
+          	    				html+="<td><img width='40' src='{% static '/media/' %}"+d.Poster+"'/></td>";
+                        html+="<td><video width='40' src='{% static '/videos/' %}"+d.Trailer+"'/></td>"
+                        html+="<td>"+d.StartTime+"</td>";
+                        html+="<td>"+d.EndTime+"</td>";
+                        html+="<td>"+d.StartDate+"</td>";
+                        html+="<td>"+d.EndDate+"</td>";
+
+          	    				html+="<td><a href='editevent/"+d.event_id+"'>Edit</a><a href='deleteevent/"+d.event_id+"'>Delete</a></td>"
+          	    			html+="</tr>"
+          	    			$("table").append(html);
+
+          	    		}
+
+          	    	},error(error){
+
+          	    	}
+          })
+		    })
+               })
+
+	</script>
+     {% endblock content %}

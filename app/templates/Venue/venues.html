@@ -1,0 +1,62 @@
+{% extends "mainpage.html" %}
+{% block content%}
+{% load static %}
+<script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+<a id="btn" class="btn btn-info" href="/venueform">Add Venues</a>
+<input type="text" id="search" name="">
+<button id="btnSearch" class="btn btn-outline-success" >Search</button>
+<table class="table table-hover table-striped table-responsive">
+     <thead class="thead-dark"
+	<tr>
+		
+		     <th>S.No</th>
+		    <th>Venue Name</th>
+		    <th>Venue Image</th>
+		    <th>Actions</th>
+		   
+	</tr>
+</thead>
+{% for venue in venues %}
+ <tr>
+ 	
+ 	<td>{{venue.S_No}}</td>
+ 	<td>{{venue.Venue_Name}}</td>
+ 	{% load static %}
+ 	<td><img src="{% static '/media/' %}{{venue.Venue_img}}" width="40"/></td>
+ 	<td><a class="btn btn-secondary" href="editvenue/{{venue.S_No}}">Edit</a>
+          <a class="btn btn-danger"href="deletevenue/{{venue.S_No}}">Delete</a></td>
+
+ </tr>	
+ {% endfor %}
+</table>
+<script language="JavaScript">
+	      $(document).ready(()=>{
+               $('#btnSearch').click(()=>{
+          	    $.ajax({
+          	    	data:{search:$('#search').val()},
+          	    	url:'/searchvenues',
+          	    	method:'GET',
+          	    	success:function(data){
+          	    		console.log(data);
+          	    		$ ("tr").not("tr:First").remove();
+          	    		var html="";
+          	    		for(d of data){
+          	    			html+="<tr>";
+          	    				html+="<td>"+d.S_No+"</td>";
+          	    				html+="<td>"+d.Venue_Name+"</td>";
+          	    				html+="<td><img width='40' src='{% static '/media/' %}"+d.Venue_img+"'/></td>";
+          	    				html+="<td><a href='editvenue/"+d.S_No+"'>Edit</a>||<a href='deletevenue/"+d.S_No+"'>Delete</a></td>"
+          	    			html+="</tr>"
+          	    			$("table").append(html);
+
+          	    		}
+
+          	    	},error(error){
+
+          	    	}
+          })
+		    })
+               })
+
+	</script>
+     {% endblock content %}

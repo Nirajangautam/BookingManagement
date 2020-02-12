@@ -1,0 +1,18 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="Post" action="eventform" enctype="multipart/form-data" class="form-group"novalidate>
+ {% csrf_token %} 
+	{{event.Event_Name|as_crispy_field}}
+	{{event.Events_Details|as_crispy_field}}
+	{{event.StartDate|as_crispy_field}}
+	{{event.EndDate|as_crispy_field}}
+	{{event.StartTime|as_crispy_field}}
+	{{event.EndTime|as_crispy_field}}
+	{{event.Casts|as_crispy_field}}
+	{{event.Poster|as_crispy_field}}
+	{{event.Trailer|as_crispy_field}}
+
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

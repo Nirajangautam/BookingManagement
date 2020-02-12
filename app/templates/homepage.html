@@ -1,0 +1,65 @@
+{% extends "mainpage.html" %}
+{% block content %}
+{%  load static %}
+
+
+
+<h2>Movies</h2>
+<!-- </thead> -->
+<div class="row">
+{% for movie in mov %}
+	
+	<div class="col-lg-3">
+		
+	<div class="thumbnail">
+		{% load static %}
+		<img class="img-thumbnail" src="{% static '/media/' %}{{movie.Poster}}" width="250" height="250" />
+ 	<!-- <video src="{% static '/media/' %}{{movie.Trailer}}" type='video/mp4' width="100"/ controls=""></video> -->
+	</div>
+
+	<br><br>
+</div>
+	<div class="col-lg-3 overflow-auto h-100">
+		<ol>
+ 	<li><label><b>Movie Name :</b></label><b>{{movie.movie_Name}}</b></li>
+ 	<li><label><b>StartTime	:</b></label><b>{{movie.StartTime}}</b></li>
+ 	<li><label><b>EndTime	:</b></label><b>{{movie.EndTime}}</b></li>
+ 	<li><label><b>StartDate	:</b></label><b>{{movie.StartDate}}</b></li>
+ 	<li><label><b>EndDate	:</b></label><b>{{movie.EndDate}}</b></li>
+ 	</ol>
+ 	</div>
+ {% endfor %}
+
+</div>
+
+<h2>Events</h2>
+<!-- </thead> -->
+<div class="row">
+	 {% for event in event %} 	
+
+	<div class="col-lg-3">
+		
+	<div class="thumbnail">
+		{% load static %}
+		<img class="img-thumbnail" src="{% static '/media/' %}{{event.Poster}}" width="250"/>
+ 	<!-- <video src="{% static '/media/' %}{{movie.Trailer}}" type='video/mp4' width="100"/ controls=""></video> -->
+	</div>
+
+	<br><br>
+</div>
+	<div class="col-lg-3">
+		<ol>
+ 	<li><label><b>Event Name :</b></label><b>{{event.Event_Name}}</b></li>
+ 	<li><label><b>StartTime	:</b></label><b>{{event.StartTime}}</b></li>
+ 	<li><label><b>EndTime	:</b></label><b>{{event.EndTime}}</b></li>
+ 	<li><label><b>Start Date	:</b></label><b>{{event.StartDate}}</b></li>
+ 	<li><label><b>End Date	:</b></label><b>{{event.EndDate}}</b></li>
+ 	</ol>
+ </div>
+ 	
+ {% endfor %}
+ </div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0 , maximum-scale=1.0">
+<head>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    {%load bootstrap %}
+	<title>Main Page</title>
+    
+    <link href="{% static '/mypage.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static '/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static '/font.txt' %}"/>
+    <script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+   
+
+</head>
+<body>
+    <nav>
+        <div id="navbar">
+            <div id="name">{{request.session.Username}}</div>
+            <div id="user"><img src="/static/media/{{users.Profile_Pic}}" id="pp"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-1" id="banner"><img src="{% static '/media/images/logo.png' %}" id="ban"/></div>
+            
+        </div>
+    </nav>  
+    <div class="containers">
+        
+        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2" id="sidepan" >
+        	<ul class="h-100">
+        		<li><a href="/events">Events</a></li>
+        		<li><a href="/venues">Venues</a></li>
+        		<li><a href="/movies">Movies</a></li>
+        		<li><a href="/users">Users</a></li>
+        		<li><a href="/ebook">Event Booking</a></li>
+                <li><a href="/mbook">Movie Booking</a></li>
+                <li><a href="/home">Homepage</a></li>
+        	</ul>
+        </div> 
+        <div class="col-lg-9 col-md-9 col-sm-10 col-xs-10 h-100 py-2 content" style="height: 100vh !important; overflow-y: auto;margin-top: 0px;">
+            {%  block content %}{% endblock %}
+        </div>
+    </div>
+    
+</body>
+</script>
+</html>

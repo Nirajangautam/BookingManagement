@@ -1,0 +1,13 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="Post" action="form" enctype="multipart/form-data" class="form-group">
+ {% csrf_token %} 
+	{{form.Username|as_crispy_field}}
+	{{form.Password|as_crispy_field}}
+	{{form.Email|as_crispy_field}}
+	{{form.Contact_Number|as_crispy_field}}
+	{{form.Profile_Pic|as_crispy_field}}
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

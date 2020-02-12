@@ -1,0 +1,18 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="Post" action="movieform" enctype="multipart/form-data"  class="overflow-auto h-100">
+ {% csrf_token %} 
+	{{mov.movie_Name|as_crispy_field}}
+	{{mov.Movie_Details|as_crispy_field}}
+	{{mov.Casts|as_crispy_field}}
+	{{mov.Poster|as_crispy_field}}
+	{{mov.Trailer|as_crispy_field}}
+	{{mov.StartDate|as_crispy_field}}
+	{{mov.EndDate|as_crispy_field}}
+	{{mov.StartTime|as_crispy_field}}
+	{{mov.EndTime|as_crispy_field}}
+
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

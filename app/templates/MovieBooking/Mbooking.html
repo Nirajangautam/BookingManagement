@@ -1,0 +1,67 @@
+{% extends "mainpage.html" %}
+{% block content%}
+{% load static %}
+<script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+<a id="btn" class="btn btn-info" href="/mbookform">New Booking</a>
+<input type="text" id="search" name="">
+<button id="btnSearch" class="btn btn-outline-success">Search</button>
+<table class="table table-hover table-striped table-responsive">
+	<tr class="thead-dark">
+		
+		   <th>S_No</th>
+		   <th>Movie Name</th>
+		   <th>Booked By</th>
+		   <th>Venue</th>
+             <th>Time</th>
+             <th>Booked for</th>
+		   <th>Action</th>
+		   
+	</tr>
+
+{% for  Mb in mbook %}
+ <tr>
+ 	<td>{{Mb.Mbooking_id}}</td>
+     <td>{{Mb.Movie.movie_Name}}</td>
+ 	<td>{{Mb.Bookedby.Username}}</td>
+     <td>{{Mb.M_Venue.Venue_Name}}</td>
+     <td>{{Mb.Movie.StartTime}}</td>
+     <td>{{Mb.Movie.StartDate}}</td>
+ 	<td><a class="btn btn-warning" href="editmbook/{{Mb.Mbooking_id}}">Edit</a>
+          <a class="btn btn-danger" href="deletembook/{{Mb.Mbooking_id}}">Delete</a></td>
+    
+
+ </tr>	
+ {% endfor %}
+</table>
+<script language="JavaScript">
+	      $(document).ready(()=>{
+               $('#btnSearch').click(()=>{
+          	    $.ajax({
+          	    	data:{search:$('#search').val()},
+          	    	url:'/search',
+          	    	method:'GET',
+          	    	success:function(data){
+          	    		console.log(data);
+          	    		$ ("tr").not("tr:First").remove();
+          	    		var html="";
+          	    		for(d of data){
+          	    			html+="<tr>";
+          	    				html+="<td>"+d.movie_id+"</td>";
+          	    				html+="<td>"+d.movie_Name+"</td>";
+          	    				html+="<td><img width='40' src='{% static '/media/' %}"+d.Poster+"'/></td>";
+                                   html+="<td><video width='40' src='{% static '/videos/' %}"+d.Trailer+"'/></td>"
+          	    				html+="<td><a class="btn btn-secondary" href='editmovies/"+d.movie_id+"'>Edit</a><a class="btn btn-danger"href='deletemovies/"+d.movie_id+"'>Delete</a></td>"
+          	    			html+="</tr>"
+          	    			$("table").append(html);
+
+          	    		}
+
+          	    	},error(error){
+
+          	    	}
+          })
+		    })
+               })
+
+	</script>
+     {% endblock content %}

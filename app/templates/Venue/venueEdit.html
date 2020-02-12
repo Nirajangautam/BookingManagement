@@ -1,0 +1,13 @@
+{% extends "mainpage.html" %}
+{% block content %}
+<form method="post" action="/updatevenue/{{venue.S_No}}" enctype="multipart/form-data">
+ {% csrf_token %}
+ <label>Venue Name</label> 
+ <input type="text" name="Venue_Name" value="{{venue.Venue_Name}}"/>
+  {% load static %}
+ <label>Venue Images</label>
+ <img src="{% static '/media/' %}{{venue.Venue_img}}" width="40"/>
+ <input type="file" name="Venue_img"/>
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

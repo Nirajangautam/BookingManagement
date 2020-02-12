@@ -1,0 +1,34 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="Post" action="ebookform" enctype="multipart/form-data" type="bootstrap">
+ {% csrf_token %} 
+ <div class="form-group">
+    Event Name:
+    <select name="Event" class="form-control">
+    	{% for x in event %}
+    	<option value="{{x.event_id}}">{{x.Event_Name}}</option>
+    	{% endfor %}
+    </select>
+</div>
+<div class="form-group">
+	Event Venue:
+	<select name="E_Venue" class="form-control">
+		{% for d in venue %}
+		<option value="{{d.S_No}}">{{d.Venue_Name}}</option>
+		{% endfor %} 
+
+	</select>
+</div>
+<div class="form-group">
+	Booked by:
+	<select name="Bookedby" class="form-control">
+		{% for d in user %}
+		<option value="{{d.user_id}}">{{d.Username}}</option>
+		{% endfor %}
+	</select>
+</div>
+		
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock content %}

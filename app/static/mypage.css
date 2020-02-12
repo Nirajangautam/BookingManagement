@@ -1,0 +1,129 @@
+@media only screen and (max-width:680px){
+  nav ul li{
+    width:100%;
+    padding:15px;
+    float:left;
+    text-align:left;
+  }
+}
+@media only screen and (max-width:760px){
+
+}
+*{
+	font-family: 'Titillium Web', sans-serif;
+}
+#sidepan{/*for side panel*/
+	background-color:#59788E;
+	width: 200px;
+	height:650px;
+	float:left;
+	margin-top: 0px;
+	
+}
+#containers{/* for container inside content*/
+    background-color: white;
+    width: 80%;
+    float: left;
+    margin-top: 60px;
+    margin-left: 30px;
+    outline-color: black;
+    outline-style: solid;
+}
+#content{/*for the contrnt show*/
+margin-left: 0px;
+    margin-top: 0px;
+    background-color: grey;
+    height: 650px;
+    width: 100%;
+
+}
+
+#navbar{/*for navigation bar*/
+	background-color: #0492C2;
+	height: 100px;
+	width: auto;
+
+}
+#banner{
+  font-size: 28px;
+  width:200px;
+  height:100px;
+  display: inline-block;
+  background-color:white;
+}
+#ban{
+padding-left: 30px;
+padding-bottom: 5px;
+height:100px;
+width:160px;
+
+}
+#user{/*to show user pic in the nav bar*/
+  display: inline-block;
+  
+  float:right;width: 100px;
+  height: 85px;
+  border-radius: 50%;
+  margin-top:10px;
+  margin-right:20px;
+  margin-bottom: 5px;
+}
+#pp{
+  display: inline-block;
+  width: 100px;
+  height: 85px;
+  border-radius: 50%;
+
+}
+#name{/*to display login user name*/
+  float:right;
+  margin-right:100px;
+  margin-top: 40px;
+  width:100px;
+
+}
+
+
+ul li{
+	margin-top: 60px;
+    text-underline-position: none;
+
+}
+ul {/*for whole list*/
+    list-style-type: none;
+    
+}
+ul li a{/*for anchor tag in list*/
+    text-decoration: none;
+    color: white;
+}
+table{
+  margin-top: 20px;
+}
+#search{
+  float:right;
+  margin-top: 10px;
+  margin-right:5px;
+
+}
+#btnSearch{
+  float:right;
+   margin-top: 7px;
+  margin-left:2px;
+  margin-right:5px;
+}
+#btn{
+  margin-top: 10px;
+}
+
+.img-thumbnail {
+    padding: .25rem !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: .25rem !important;
+    max-width: 100% !important;
+    height: 250px !important;
+}
+.form-group{
+  overflow-y:auto;
+}

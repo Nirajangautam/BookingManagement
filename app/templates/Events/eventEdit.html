@@ -1,0 +1,28 @@
+{% extends "mainpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post" action="/updateevent/{{event.event_id}}" enctype="multipart/form-data" class="form-group">
+ {% csrf_token %}
+ <label>Event Name</label> 
+ <input type="text" name="Event_Name" value="{{event.Event_Name}}"/>
+ <label>Event Details</label>
+  <input type="text" name="Events_Details" value="{{event.Events_Details}}"/>
+  <label>Casts</label>
+  <input type="text" name="Casts" value="{{event.Casts}}"/>
+   <label>Poster</label>
+ {% load static %}
+ <img src="{% static '/media/' %}{{event.Poster}}" width="100"/>
+ <input type="file" name="Poster"/>
+ <label>Promo video</label>
+ <input type="file" src="{% static '/media/' %}{{event.Trailer}}" width="40" name="Trailer"/>
+<label>Start Date</label>
+<input type="date" name="StartDate"/>
+<label>End Date</label>
+<input type="date" name="EndDate"/>
+<label>Start Time</label>
+<input type="time" name="StartTime"/>
+<label>End Time</label>
+<input type="time" name="EndTime"/>
+	<button type="submit">Submit</button>
+</form>
+{% endblock content %}

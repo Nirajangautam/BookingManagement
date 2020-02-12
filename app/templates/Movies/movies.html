@@ -1,0 +1,78 @@
+{% extends "mainpage.html" %}
+{% block content%}
+{% load static %}
+<script src="{% static '/jquery-3.4.1.min.js' %}"></script>
+<a id="btn" class="btn btn-info" href="/movieform">Add Movies</a>
+<input type="text" id="search" name="">
+<button id="btnSearch" class="btn btn-outline-success">Search</button>
+<table class="table table-hover table-striped table-responsive">
+     <!-- <thead class="thead-dark"> -->
+	<tr class="thead-dark">
+		
+		   <th>S_No</th>
+		   <th>Movie Name</th>
+		   <th>Poster</th>
+		   <th>Trailer video</th>
+             <th>Start Time</th>
+             <th>End Time</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+		   <th>Action</th>
+		   
+	</tr>
+<!-- </thead> -->
+{% for  movie in mov %}
+ <tr>
+ 	
+ 	<td>{{movie.movie_id}}</td>
+ 	<td>{{movie.movie_Name}}</td>
+     {% load static %}
+     <td><img src="{% static '/media/' %}{{movie.Poster}}" width="40"/></td>
+ 	<td><video src="{% static '/media/' %}{{movie.Trailer}}" type='video/mp4' width="100"/ controls=""></video></td>
+     <td>{{movie.StartTime}}</td>
+     <td>{{movie.EndTime}}</td>
+     <td>{{movie.StartDate}}</td>
+     <td>{{movie.EndDate}}</td>
+ 	<td><a class="btn btn-warning" href="editmovies/{{movie.movie_id}}">Edit</a>
+          <a class="btn btn-danger" href="deletemovies/{{movie.movie_id}}">Delete</a></td>
+    
+
+ </tr>	
+ {% endfor %}
+</table>
+<script language="JavaScript">
+	      $(document).ready(()=>{
+               $('#btnSearch').click(()=>{
+          	    $.ajax({
+          	    	data:{search:$('#search').val()},
+          	    	url:'/searchmov',
+          	    	method:'GET',
+          	    	success:function(data){
+          	    		console.log(data);
+          	    		$ ("tr").not("tr:First").remove();
+          	    		var html="";
+          	    		for(d of data){
+          	    			html+="<tr>";
+          	    				html+="<td>"+d.movie_id+"</td>";
+          	    				html+="<td>"+d.movie_Name+"</td>";
+          	    				html+="<td><img width='40' src='{% static '/media/' %}"+d.Poster+"'/></td>";
+                                   html+="<td><video width='40' src='{% static '/videos/' %}"+d.Trailer+"'/></td>"
+                        html+="<td>"+d.StartTime+"</td>";
+                         html+="<td>"+d.EndTime+"</td>";
+                         html+="<td>"+d.StartDate+"</td>";
+                         html+="<td>"+d.EndDate+"</td>";          
+          	    				html+="<td><a href='editmovies/"+d.movie_id+"'>Edit</a><a href='deletemovies/"+d.movie_id+"'>Delete</a></td>"
+          	    			html+="</tr>"
+          	    			$("table").append(html);
+
+          	    		}
+
+          	    	},error(error){
+
+          	    	}
+          })
+		    })
+               })
+
+	</script>
+     {% endblock content %}
